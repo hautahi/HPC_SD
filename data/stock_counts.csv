@@ -1,0 +1,15 @@
+This file is outlines the various counts of stocks and substocks within the
+system. All information follows the line "stock_counts:", and should include
+"tobacco_products", "tobacco_states", "health_conditions", "health_states",
+"addiction_levels", and "age_groups". If any of the rows are missing, the
+software will use the respective defaults of 2, 3, 2, 2, 4, and 3, upon
+initiation.
+
+
+stock_counts:
+tobacco_products, 2
+tobacco_states, 3
+health_conditions, 2
+health_states, 2
+addiction_levels, 4
+age_groups, 3

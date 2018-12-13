@@ -1,0 +1,7 @@
+Ordered list of races to be considered. A category of 'other' will be
+automatically added in order to account for the entire population. Race names
+should be selected from: 'white', 'african_american', 'hispanic',
+'native_american', 'asian', or 'hawaiian'.
+
+races:
+white

@@ -1,0 +1,11 @@
+{
+    "years":1,
+    "steps":12,
+    "foi":1,
+    "num_foi":10,
+    "data_dir":"data",
+    "init_fp":"",
+    "stochastic":1,
+    "sruns":10,
+    "gui":0
+}
