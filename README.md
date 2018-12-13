@@ -13,7 +13,7 @@ Python code developed by Aaron to implement IMPAQ System Dynamics Model on AWS
 ## AWS Multicore Instructions
 1. Setup instance on the AWS website
 2. Login to AWS instance via: `ssh -i path/to/amazonkey.pem ec2-user@instance-address.amazonaws.com`
-3. Setup AWS instance with: `sudo yum install python3` and `sudo pip3 install numpy pandas joblib`
+3. Setup AWS instance with: `sudo yum install python3` and `sudo pip3 install numpy pandas joblib scipy`
 4. Transfer file to instance: `scp -i amazonkey.pem file_name ec2-user@instance-address.amazonaws.com:`
 5. Transfer folder to instance: `scp -i amazonkey.pem -r folder_name ec2-user@instance-address.amazonaws.com:`
 6. Transfer files back to local machine: `scp -i amazonkey.pem -r ec2-user@instance-address.amazonaws.com: .`
