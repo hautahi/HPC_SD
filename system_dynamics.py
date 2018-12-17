@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 
 """
-Sun 09 Dec 2018 09:14:36 AM PST
+Thu 13 Dec 2018 09:04:02 AM PST
 
 @author:    aaron heuser
-@version:   3.0
+@version:   3.1
 @filename:  system_dynamics.py
 """
 
@@ -12,17 +12,17 @@ import csv
 import datetime
 import json
 import sys
-import system_dynamics_manager
+import system_dynamics_manager as system_dynamics_manager
 
 if __name__ == '__main__':
     
     # Get the arguments passed in via the terminal. We look for one argument,
     # the path to a file with the run parameters, which is designated by the
     # flag '-f'.
-    
-    args = sys.argv[1:]
-    run_fp = args[args.index('-f') + 1]
 
+    args = sys.argv[1:]
+    run_fp = args[0]
+    
     # Import the run parameters.
     with open(run_fp, 'r') as f:
         params = json.load(f)
