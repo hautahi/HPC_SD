@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 
 """
-Sun 09 Dec 2018 09:15:47 AM PST
+Thu 13 Dec 2018 09:04:31 AM PST
 
 @author:    aaron heuser
-@version:   3.0
+@version:   3.1
 @filename:  system_dynamics_manager.py
 """
 
@@ -946,17 +946,28 @@ class SystemDynamicsManager():
         # Run the deterministic model simulations. We set a MFSG instance for
         # for each (sex, race) pair.
         for x, key in enumerate(self.product((2, self.nraces))):
-            # The MFSG ID (self.sruns == 1 if self.scheck == 0).
-            m = x / (2 * self.nraces * self.sruns)
-            self.mfsg[key] = MeanFieldSolutionGenerator(self, m, key)
-            # If no theta file exists, then generate one now.
-            self.gen_theta_file()
-            # Convert the densities to counts. This will set self._counts.
-            self.gen_counts()
-            # Get the death counts. This will set self._death_counts.
-            self.gen_death_counts()
-            # Output to file.
-            self.write()
+            self.run_sex_race(x, key)
+
+    def run_sex_race(self, x, key):
+        """
+        Parameters: x: int
+                        The enumerated index of the sex, race key.
+                    key: tuple
+                        The length two tuple denoting (sex, race).
+        Returns:    None
+        """
+
+        # The MFSG ID (self.sruns == 1 if self.scheck == 0).
+        m = x / (2 * self.nraces * self.sruns)
+        self.mfsg[key] = MeanFieldSolutionGenerator(self, m, key)
+        # If no theta file exists, then generate one now.
+        self.gen_theta_file()
+        # Convert the densities to counts. This will set self._counts.
+        self.gen_counts()
+        # Get the death counts. This will set self._death_counts.
+        self.gen_death_counts()
+        # Output to file.
+        self.write()
 
     def set_output_columns(self):
         """
@@ -980,7 +991,8 @@ class SystemDynamicsManager():
             cols += ['Year {0}'.format(x) for x in col_range]
         else:
             # In this case, we have some arbitrary steps.
-            cols += np.linspace(0, self.years, self.years * self.steps + 1).tolist()
+            total_steps = self.years * self.steps + 1
+            cols += np.linspace(0, self.years, total_steps).tolist()
         self._columns = cols
 
     def set_demographics(self):
@@ -1921,26 +1933,7 @@ class MeanFieldSolutionGenerator():
         """
 
         for x, alpha in enumerate(self.sdm.foi_range):
-            print('Working on alpha = {0}'.format(alpha))
-            # Set the progress bar value if one exists.
-            if self.sdm.gui != 0:
-                # The max value for the current progress updates.
-                const = 2 * self.sdm.nraces * self.sdm.sruns
-                max_0 = self.mfsg_id + 1.0 / const
-                denom = self.t_max * const
-                max_1 = max(self.mfsg_id + self.current_t / denom, self.t_step)
-                self.t_step = min(max_1, max_0)
-                self.set_progress(self.t_step)
-            if not self.sdm.scheck:
-                # Get the solution for alpha.
-                y_alpha =  self.sdm.foi_dist[x] * self.solve_foi(alpha)
-            else:
-                # Get the array of stochastic solutions.
-                y_alpha = []
-                for _ in range(self.sdm.sruns):
-                    print('Stochastic run number: {0}'.format(_))
-                    y_alpha += [self.sdm.foi_dist[x] * self.solve_sfoi(alpha)]
-                y_alpha = np.array(y_alpha)
+            y_alpha = self.solve_step(x, alpha)
             if x == 0:
                 sol_0 = y_alpha
             else:
@@ -2000,6 +1993,38 @@ class MeanFieldSolutionGenerator():
             y0 += np.array(self.dy_foi(t, y0, alpha)) * dt
             y += [y0]
         return np.array(y).T
+
+    def solve_step(self, step, alpha):
+        """
+        Parameters: step: int
+                        The FOI step for which the solution is desired.
+                    alpha: int
+                        The FOI associated to step.
+        Returns:    y_alpha: array
+                        The solution associated to the given step.
+        """
+
+        print('Working on alpha = {0}'.format(alpha))
+        # Set the progress bar value if one exists.
+        if self.sdm.gui != 0:
+            # The max value for the current progress updates.
+            const = 2 * self.sdm.nraces * self.sdm.sruns
+            max_0 = self.mfsg_id + 1.0 / const
+            denom = self.t_max * const
+            max_1 = max(self.mfsg_id + self.current_t / denom, self.t_step)
+            self.t_step = min(max_1, max_0)
+            self.set_progress(self.t_step)
+        if not self.sdm.scheck:
+            # Get the solution for alpha.
+            y_alpha =  self.sdm.foi_dist[step] * self.solve_foi(alpha)
+        else:
+            # Get the array of stochastic solutions.
+            y_alpha = []
+            for _ in range(self.sdm.sruns):
+                print('Stochastic run number: {0}'.format(_))
+                y_alpha += [self.sdm.foi_dist[step] * self.solve_sfoi(alpha)]
+            y_alpha = np.array(y_alpha)
+        return y_alpha
 
     def theta_function(self, f):
         """
