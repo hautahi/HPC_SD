@@ -9,9 +9,9 @@ import pandas as pd
 import os
 
 param_file = "./data/run_parameters.json"
-output_file = "./outputs/timings/deterministic_years.csv"
+output_file = "./outputs/timings/stochastic_years.csv"
 
-for year in [30,50]:
+for year in [1,5,10]:
     
     print('*****')
     print("Running Simulation for years: " + str(year))
@@ -23,7 +23,9 @@ for year in [30,50]:
     
     # adjust years
     params['years'] = year
-    params['stochastic'] = 0
+    params['num_foi'] = 10
+    params['stochastic'] = 1
+    params['sruns'] = 10
 
     # save adjusted parameters file
     with open(param_file, 'w') as f:

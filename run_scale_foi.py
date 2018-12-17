@@ -1,5 +1,5 @@
 """
-- This program runs the code for increasing number of years.
+- This program runs the code for increasing number of "influence" parameters and records the running time.
 """
 
 import json
@@ -11,7 +11,7 @@ import os
 param_file = "./data/run_parameters.json"
 output_file = "./outputs/timings/deterministic_foi.csv"
 
-for nfoi in [20,50,80]:
+for nfoi in [10,15,20,50,80,100]:
     
     print('*****')
     print("Running Simulation for FOI number: " + str(nfoi))
