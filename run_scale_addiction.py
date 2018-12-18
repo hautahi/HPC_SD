@@ -10,13 +10,13 @@ import os
 import csv
 
 param_file = "./data/run_parameters.json"
-output_file = "./outputs/timings/deterministic_age.csv"
+output_file = "./outputs/timings/deterministic_addiction.csv"
 fname = './data/stock_counts.csv'
 
 for addiction in [4,5,10,20,30,40,50]:
     
     print('*****')
-    print("Running Simulation for age: " + str(addiction))
+    print("Running Simulation for addiction: " + str(addiction))
     print('*****')
 
     # open the run_parameters file
@@ -57,5 +57,5 @@ for addiction in [4,5,10,20,30,40,50]:
     if os.path.isfile(output_file):
         pd.DataFrame({'addiction' : [addiction], 'time': [seconds]}).to_csv(output_file, index=False,mode='a',header=False)
     else:
-        pd.DataFrame({'age' : [age], 'time': [seconds]}).to_csv(output_file, index=False)
+        pd.DataFrame({'addiction' : [addiction], 'time': [seconds]}).to_csv(output_file, index=False)
 
