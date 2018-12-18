@@ -193,13 +193,39 @@ class SystemDynamicsManager():
             d = self.death[sr]
             death[sr] = []
             # We begin with the death rates for S stocks.
-            death[sr] += [d[(0, 0, 0, 0, 0, v)] for v in rng_S]
+            
+            #death[sr] += [d[(0, 0, 0, 0, 0, v)] for v in rng_S]
             # Now for I stocks.
-            death[sr] += [d[(0, 0, z, w, 0, v)] for (z, w, v) in rng_I]
+            #death[sr] += [d[(0, 0, z, w, 0, v)] for (z, w, v) in rng_I]
             # The U stocks.
-            death[sr] += [d[(x, y, 0, 0, a, v)] for (x, y, a, v) in rng_U]
+            #death[sr] += [d[(x, y, 0, 0, a, v)] for (x, y, a, v) in rng_U]
             # Finally, the Z stocks.
-            death[sr] += [d[key] for key in rng_Z]
+            #death[sr] += [d[key] for key in rng_Z]
+
+            for v in rng_S:
+                if (0, 0, 0, 0, 0, v) in d:
+                    death[sr].append(d[(0, 0, 0, 0, 0, v)])
+                else:
+                    death[sr].append(d[(0, 0, 0, 0, 0, 2)])
+            # Now for I stocks.
+            for (z,w,v) in rng_I:
+                if (0, 0, z, w, 0, v) in d:
+                    death[sr].append(d[(0, 0, z, w, 0, v)])
+                else:
+                    death[sr].append(d[(0, 0, z, w, 0, 2)])
+            # The U stocks.
+            for (x,y,a,v) in rng_U:
+                if (x,y,0,0,a,v) in d:
+                    death[sr].append(d[(x, y, 0, 0, a, v)])
+                else:
+                    death[sr].append(d[(x, y, 0, 0, a, 2)])
+            # Finally, the Z stocks.
+            for (x,y,z,w,a,v) in rng_Z:
+                if (x,y,z,w,a,v) in d:
+                    death[sr].append(d[(x,y,z,w,a,v)])
+                else:
+                    death[sr].append(d[(x,y,z,w,a,2)])
+            
         # Set the property self._dy_death.
         self._dy_death = death
 
@@ -265,18 +291,28 @@ class SystemDynamicsManager():
             # Loop through each age group v and assign stock rates for S[v].
             for v in range(self.sizes['age_groups']):
                 # We generate a list of all possible probabilities.
-                q = [self.lambdas[sr][v], self.kappa[sr][(0, 0, v)]]
+                if v in self.lambdas[sr] and (0, 0, v) in self.kappa[sr]:
+                    q = [self.lambdas[sr][v], self.kappa[sr][(0, 0, v)]]
+                else:
+                    q = [self.lambdas[sr][2], self.kappa[sr][(0, 0, 2)]]
                 # If we are not in the oldest age group, aging is allowed.
-                if v < 2:
-                    q += [np.array([self.age[v]])]
+                if v < self.sizes['age_groups'] - 1:
+                    if v in self.age:
+                        q += [np.array([self.age[v]])]
+                    else:
+                        q += [np.array([self.age[1]])]
+
                 # The death probability.
-                d = self.death[sr][(0, 0, 0, 0, 0, v)]
+                if (0, 0, 0, 0, 0, v) in self.death[sr]:
+                    d = self.death[sr][(0, 0, 0, 0, 0, v)]
+                else:
+                    d = self.death[sr][(0, 0, 0, 0, 0, 2)]
                 # Given the death rate and the possible transition rates, we
                 # can determine the stock transition probabilities.
                 trans = self.gen_transitions(q, d)
                 rates[sr]['S']['lambda'][v] = trans[0]
                 rates[sr]['S']['kappa'][v] = trans[1]
-                if v < 2:
+                if v < self.sizes['age_groups'] - 1:
                     rates[sr]['S']['age'][v] = trans[2]
             # Now the transition rates for stocks of type I, which again allows
             # for initiation, infection, and aging.
@@ -285,26 +321,41 @@ class SystemDynamicsManager():
                 # For (z, w) we have the following possibilities (0, 1), (1,
                 # 0), (1, 1), which influence the list of all possible
                 # probabilities.
-                q = [self.lambdas[sr][v]]
+                if v in self.lambdas[sr]:
+                    q = [self.lambdas[sr][v]]
+                else:
+                    q = [self.lambdas[sr][2]]
                 # Since the resulting elements of q can vary in meaning, we
                 # keep track of the index keys.
                 q_keys = ['lambda']
                 if (z, w) == (0, 1):
                     # In this case we can only make a health transition to
                     # condition one.
-                    q += [self.kappa[sr][(0, 0, v)][0:1]]
+                    if (0, 0, v) in self.kappa[sr]:
+                        q += [self.kappa[sr][(0, 0, v)][0:1]]
+                    else:
+                        q += [self.kappa[sr][(0, 0, 2)][0:1]]
                     q_keys += ['kappa']
                 elif (z, w) == (1, 0):
                     # Now we can transition to condition two.
-                    q += [self.kappa[sr][(0, 0, v)][1:2]]
+                    if (0, 0, v) in self.kappa[sr]:
+                        q += [self.kappa[sr][(0, 0, v)][1:2]]
+                    else:
+                        q += [self.kappa[sr][(0, 0, 2)][1:2]]
                     q_keys += ['kappa']
                 # No health transitions can occur if (z, w) == (1, 1), so we
                 # proceed with possible age transitions.
-                if v < 2:
-                    q += [np.array([self.age[v]])]
+                if v < self.sizes['age_groups'] - 1:
+                    if v in self.age:
+                        q += [np.array([self.age[v]])]
+                    else:
+                        q += [np.array([self.age[1]])]
                     q_keys += ['age']
                 # The death probability.
-                d = self.death[sr][(0, 0, z, w, 0, v)]
+                if (0, 0, z, w, 0, v) in self.death[sr]:
+                    d = self.death[sr][(0, 0, z, w, 0, v)]
+                else:
+                    d = self.death[sr][(0, 0, z, w, 0, 2)]
                 # Generate the transition rates.
                 trans = self.gen_transitions(q, d)
                 # Now allocate to rates.
@@ -325,41 +376,68 @@ class SystemDynamicsManager():
                 # we cannot have x == y == 0.
                 if x == 0:
                     # We can initiate product 1 to become a dual user.
-                    q += [self.lambdas[sr][v][0:1]]
+                    if v in self.lambdas[sr]: 
+                        q += [self.lambdas[sr][v][0:1]]
+                    else:
+                        q += [self.lambdas[sr][2][0:1]]
                     q_keys += ['lambda']
                 elif y == 0:
                     # We can initiate product 2 to become a dual user.
-                    q += [self.lambdas[sr][v][1:2]]
+                    if v in self.lambdas[sr]:
+                        q += [self.lambdas[sr][v][1:2]]
+                    else:
+                        q += [self.lambdas[sr][2][1:2]]
                     q_keys += ['lambda']
                 # Since individuals in U are not afflicted with either
                 # condition, we can transition to both.
-                q += [self.kappa[sr][(x, y, v)]]
+                if (x, y, v) in self.kappa[sr]:
+                    q += [self.kappa[sr][(x, y, v)]]
+                else:
+                    q += [self.kappa[sr][(x, y, 2)]]
                 q_keys += ['kappa']
                 # Relapse can only happen if x == 2 or y == 2.
                 if (x, y) == (2, 2):
                     # In this case it is possible to relapse to either.
-                    q += [self.gamma[sr][(a, v)]]
+                    if (a,v) in self.gamma[sr]:
+                        q += [self.gamma[sr][(a, v)]]
+                    else:
+                        q += [self.gamma[sr][(3, 2)]]
                     q_keys += ['gamma']
                 elif x == 2:
                     # We can relapse to product 1.
-                    q += [self.gamma[sr][(a, v)][0:1]]
+                    if (a,v) in self.gamma[sr]:
+                        q += [self.gamma[sr][(a, v)][0:1]]
+                    else:
+                        q += [self.gamma[sr][(3, 2)][0:1]]
                     q_keys += ['gamma']
                 elif y == 2:
                     # We can relapse to product 2.
-                    q += [self.gamma[sr][(a, v)][1:2]]
+                    if (a,v) in self.gamma[sr]:
+                        q += [self.gamma[sr][(a, v)][1:2]]
+                    else:
+                        q += [self.gamma[sr][(3, 2)][1:2]]
                     q_keys += ['gamma']
                 # Cessation can occur only when x == 1 or y == 1.
                 if (x, y) == (1, 1):
                     # We can cease either product.
-                    q += [self.chi[sr][(a, v)]]
+                    if (a,v) in self.chi[sr]:
+                        q += [self.chi[sr][(a, v)]]
+                    else:
+                        q += [self.chi[sr][(3, 2)]]
                     q_keys += ['chi']
                 elif x == 1:
                     # We can cease product 1.
-                    q += [self.chi[sr][(a, v)][0:1]]
+                    if (a,v) in self.chi[sr]:
+                        q += [self.chi[sr][(a, v)][0:1]]
+                    else:
+                        q += [self.chi[sr][(3, 2)][0:1]]
                     q_keys += ['chi']
                 elif y == 1:
                     # We can cease product 2.
-                    q += [self.chi[sr][(a, v)][1:2]]
+                    if (a,v) in self.chi[sr]:
+                        q += [self.chi[sr][(a, v)][1:2]]
+                    else:
+                        q += [self.chi[sr][(3, 2)][1:2]]
                     q_keys += ['chi']
                 # We can increase the level of addiction when a < 3 and at
                 # least one product is currently being used.
@@ -369,14 +447,24 @@ class SystemDynamicsManager():
                 # We can decrease addiction only if we have some level of
                 # addiction and are not using any products.
                 if a > 0 and (x != 1 and y != 1):
-                    q += [np.array([self.psi[a - 1]])]
+                    if (a-1) in self.psi:
+                        q += [np.array([self.psi[a - 1]])]
+                    else:
+                        q += [np.array([self.psi[3 - 1]])]
                     q_keys += ['psi']
                 # We can age if not in the oldest age group.
-                if v < 2:
-                    q += [np.array([self.age[v]])]
+                if v < self.sizes['age_groups'] - 1:
+                    if v in self.age:
+                        q += [np.array([self.age[v]])]
+                    else:
+                        q += [np.array([self.age[1]])]
                     q_keys += ['age']
                 # The death rate.
-                d = self.death[sr][(x, y, 0, 0, a, v)]
+                if (x, y, 0, 0, a, v) in self.death[sr]:
+                    d = self.death[sr][(x, y, 0, 0, a, v)]
+                else:
+                    d = self.death[sr][(x, y, 0, 0, 3, 2)]
+
                 # Get the transition probabilities.
                 trans = self.gen_transitions(q, d)
                 # Reallocate to the rates.
@@ -398,46 +486,76 @@ class SystemDynamicsManager():
                 # we cannot have x == y == 0.
                 if x == 0:
                     # We can initiate product 1 to become a dual user.
-                    q += [self.lambdas[sr][v][0:1]]
+                    if v in self.lambdas[sr]:
+                        q += [self.lambdas[sr][v][0:1]]
+                    else:
+                        q += [self.lambdas[sr][2][0:1]]
                     q_keys += ['lambda']
                 elif y == 0:
                     # We can initiate product 2 to become a dual user.
-                    q += [self.lambdas[sr][v][1:2]]
+                    if v in self.lambdas[sr]:
+                        q += [self.lambdas[sr][v][1:2]]
+                    else:
+                        q += [self.lambdas[sr][2][1:2]]
                     q_keys += ['lambda']
                 # Health transitions are allowed when (z, w) != (1, 1).
                 if z == 0:
                     # We can develop condition 1.
-                    q += [self.kappa[sr][(x, y, v)][0:1]]
+                    if (x,y,v) in self.kappa[sr]:
+                        q += [self.kappa[sr][(x, y, v)][0:1]]
+                    else:
+                        q += [self.kappa[sr][(x, y, 2)][0:1]]
                     q_keys += ['kappa']
                 elif w == 0:
                     # We can develop condition 2.
-                    q += [self.kappa[sr][(x, y, v)][1:2]]
+                    if (x,y,v) in self.kappa[sr]:
+                        q += [self.kappa[sr][(x, y, v)][1:2]]
+                    else:
+                        q += [self.kappa[sr][(x, y, 2)][1:2]]
                     q_keys += ['kappa']
                 # Relapse can only happen if x == 2 or y == 2.
                 if (x, y) == (2, 2):
                     # In this case it is possible to relapse to either.
-                    q += [self.gamma[sr][(a, v)]]
+                    if (a,v) in self.gamma[sr]:
+                        q += [self.gamma[sr][(a, v)]]
+                    else:
+                        q += [self.gamma[sr][(3, 2)]]
                     q_keys += ['gamma']
                 elif x == 2:
                     # We can relapse to product 1.
-                    q += [self.gamma[sr][(a, v)][0:1]]
+                    if (a,v) in self.gamma[sr]:
+                        q += [self.gamma[sr][(a, v)][0:1]]
+                    else:
+                        q += [self.gamma[sr][(3, 2)][0:1]]
                     q_keys += ['gamma']
                 elif y == 2:
                     # We can relapse to product 2.
-                    q += [self.gamma[sr][(a, v)][1:2]]
+                    if (a,v) in self.gamma[sr]:
+                        q += [self.gamma[sr][(a, v)][1:2]]
+                    else:
+                        q += [self.gamma[sr][(3, 2)][1:2]]
                     q_keys += ['gamma']
                 # Cessation can occur only when x == 1 or y == 1.
                 if (x, y) == (1, 1):
                     # We can cease either product.
-                    q += [self.chi[sr][(a, v)]]
+                    if (a,v) in self.chi[sr]:
+                        q += [self.chi[sr][(a, v)]]
+                    else:
+                        q += [self.chi[sr][(3, 2)]]
                     q_keys += ['chi']
                 elif x == 1:
                     # We can cease product 1.
-                    q += [self.chi[sr][(a, v)][0:1]]
+                    if (a,v) in self.chi[sr]:
+                        q += [self.chi[sr][(a, v)][0:1]]
+                    else:
+                        q += [self.chi[sr][(3, 2)][0:1]]
                     q_keys += ['chi']
                 elif y == 1:
                     # We can cease product 2.
-                    q += [self.chi[sr][(a, v)][1:2]]
+                    if (a,v) in self.chi[sr]:
+                        q += [self.chi[sr][(a, v)][1:2]]
+                    else:
+                        q += [self.chi[sr][(3, 2)][1:2]]
                     q_keys += ['chi']
                 # We can increase the level of addiction when a < 3 and at
                 # least one product is currently being used.
@@ -450,11 +568,17 @@ class SystemDynamicsManager():
                     q += [np.array([self.psi[a - 1]])]
                     q_keys += ['psi']
                 # We can age if not in the oldest age group.
-                if v < 2:
-                    q += [np.array([self.age[v]])]
+                if v < self.sizes['age_groups'] - 1:
+                    if v in self.age:
+                        q += [np.array([self.age[v]])]
+                    else:
+                        q += [np.array([self.age[1]])]
                     q_keys += ['age']
                 # The death rate. 
-                d = self.death[sr][(x, y, z, w, a, v)]
+                if (x, y, z, w, a, v) in self.death[sr]:
+                    d = self.death[sr][(x, y, z, w, a, v)]
+                else:
+                    d = self.death[sr][(x, y, z, w, 3, 2)]
                 # Get the transition probabilities.
                 trans = self.gen_transitions(q, d)
                 # Reallocate to the rates.
@@ -1576,9 +1700,12 @@ class MeanFieldSolutionGenerator():
             f_out += alpha * np.dot(self.rates['S']['lambda'][v], t)
             f_out += sum(self.rates['S']['kappa'][v])
             # The outflow due to death.
-            f_out += self.sdm.death[self.sex_race][(0, 0, 0, 0, 0, v)]
+            if (0, 0, 0, 0, 0, v) in self.sdm.death[self.sex_race]:
+                f_out += self.sdm.death[self.sex_race][(0, 0, 0, 0, 0, v)]
+            else:
+                f_out += self.sdm.death[self.sex_race][(0, 0, 0, 0, 0, 2)]
             # The outflow due to aging.
-            if v < 2:
+            if v < self.sdm.sizes['age_groups'] - 1:
                 f_out += self.rates['S']['age'][v]
             dydt += list(f_in - f_out * f[s_idx])
         # Loop through the I stocks,
@@ -1609,9 +1736,12 @@ class MeanFieldSolutionGenerator():
             # Outflow due to product initiation.
             f_out += alpha * np.dot(self.rates['I']['lambda'][key], t)
             # Outflow due to death.
-            f_out += self.sdm.death[self.sex_race][(0, 0, z, w, 0, v)]
+            if (0, 0, z, w, 0, v) in self.sdm.death[self.sex_race]:
+                f_out += self.sdm.death[self.sex_race][(0, 0, z, w, 0, v)]
+            else:
+                f_out += self.sdm.death[self.sex_race][(0, 0, z, w, 0, 2)]
             # Outflow due to aging.
-            if v < 2:
+            if v < self.sdm.sizes['age_groups'] - 1:
                 f_out += self.rates['I']['age'][key]
             dydt += list(f_in - f_out * f[i_idx])
         # Loop through the U stocks.
@@ -1683,7 +1813,10 @@ class MeanFieldSolutionGenerator():
                 idx_0 = self.sdm.stock_index((x, y, 0, 0, a, v - 1))
                 f_in += self.rates['U']['age'][(x, y, a, v - 1)] * f[idx_0]
             # Outflow due to death.
-            f_out += self.sdm.death[self.sex_race][(x, y, 0, 0, a, v)]
+            if (x, y, 0, 0, a, v) in self.sdm.death[self.sex_race]:
+                f_out += self.sdm.death[self.sex_race][(x, y, 0, 0, a, v)]
+            else:
+                f_out += self.sdm.death[self.sex_race][(x, y, 0, 0, a, 2)]
             # Outflow due to developing a health condition.
             f_out += sum(self.rates['U']['kappa'][key])
             # Outflow due to increased addiction of a currently used
@@ -1711,7 +1844,7 @@ class MeanFieldSolutionGenerator():
             elif x == 1 or y == 1:
                 f_out += self.rates['U']['chi'][key]
             # Outflow due to aging.
-            if v < 2:
+            if v < self.sdm.sizes['age_groups'] - 1:
                 f_out += self.rates['U']['age'][key]
             dydt += list(f_in - f_out * f[u_idx])
         # Loop through Z stocks.
@@ -1809,7 +1942,10 @@ class MeanFieldSolutionGenerator():
                 idx_0 = self.sdm.stock_index(key_0)
                 f_in += self.rates['Z']['age'][key_0] * f[idx_0]
             # Outflow due to death.
-            f_out += self.sdm.death[self.sex_race][key]
+            if (x,y,z,w,a,v) in self.sdm.death[self.sex_race]:
+                f_out += self.sdm.death[self.sex_race][(x,y,z,w,a,v)]
+            else:
+                f_out += self.sdm.death[self.sex_race][(x,y,z,w,a,2)]
             # Outflow due to increased addiction of current product.
             if (x == 1 or y == 1) and a < 3:
                 f_out += self.rates['Z']['phi'][key]
@@ -1840,7 +1976,7 @@ class MeanFieldSolutionGenerator():
             elif x == 1 or y == 1:
                 f_out += self.rates['Z']['chi'][key]
             # Outflow due to aging.
-            if v < 2:
+            if v < self.sdm.sizes['age_groups'] - 1:
                 f_out += self.rates['Z']['age'][key]
             dydt += list(f_in - f_out * f[z_idx])
         return dydt
