@@ -13,10 +13,10 @@ param_file = "./data/run_parameters.json"
 output_file = "./outputs/timings/deterministic_age.csv"
 fname = './data/stock_counts.csv'
 
-for age in [3,4,5,10,20,30,40,50]:
+for addiction in [4,5,10,20,30,40,50]:
     
     print('*****')
-    print("Running Simulation for age: " + str(age))
+    print("Running Simulation for age: " + str(addiction))
     print('*****')
 
     # open the run_parameters file
@@ -39,9 +39,9 @@ for age in [3,4,5,10,20,30,40,50]:
     
     lines = list(reader)
     # set number of age groups
-    lines[-1][1] = str(age)
+    lines[-1][1] = str(3)
     # set number of addiction levels
-    lines[-2][1] = str(4)
+    lines[-2][1] = str(addiction)
 
     with open(fname, 'w') as outf:
         writer = csv.writer(outf)
@@ -55,7 +55,7 @@ for age in [3,4,5,10,20,30,40,50]:
 
     # Save time to file
     if os.path.isfile(output_file):
-        pd.DataFrame({'age' : [age], 'time': [seconds]}).to_csv(output_file, index=False,mode='a',header=False)
+        pd.DataFrame({'addiction' : [addiction], 'time': [seconds]}).to_csv(output_file, index=False,mode='a',header=False)
     else:
         pd.DataFrame({'age' : [age], 'time': [seconds]}).to_csv(output_file, index=False)
 

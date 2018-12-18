@@ -218,13 +218,13 @@ class SystemDynamicsManager():
                 if (x,y,0,0,a,v) in d:
                     death[sr].append(d[(x, y, 0, 0, a, v)])
                 else:
-                    death[sr].append(d[(x, y, 0, 0, a, 2)])
+                    death[sr].append(d[(x, y, 0, 0, 3, 2)])
             # Finally, the Z stocks.
             for (x,y,z,w,a,v) in rng_Z:
                 if (x,y,z,w,a,v) in d:
                     death[sr].append(d[(x,y,z,w,a,v)])
                 else:
-                    death[sr].append(d[(x,y,z,w,a,2)])
+                    death[sr].append(d[(x,y,z,w,3,2)])
             
         # Set the property self._dy_death.
         self._dy_death = death
@@ -317,6 +317,7 @@ class SystemDynamicsManager():
             # Now the transition rates for stocks of type I, which again allows
             # for initiation, infection, and aging.
             rates[sr]['I'] = {'lambda':{}, 'kappa':{}, 'age':{}}
+            print(self.product('I'))
             for (z, w, v) in self.product('I'):
                 # For (z, w) we have the following possibilities (0, 1), (1,
                 # 0), (1, 1), which influence the list of all possible
@@ -565,7 +566,10 @@ class SystemDynamicsManager():
                 # We can decrease addiction only if we have some level of
                 # addiction and are not using any products.
                 if a > 0 and (x != 1 and y != 1):
-                    q += [np.array([self.psi[a - 1]])]
+                    if (a-1) in self.psi:
+                        q += [np.array([self.psi[a - 1]])]
+                    else:
+                        q += [np.array([self.psi[3 - 1]])]
                     q_keys += ['psi']
                 # We can age if not in the oldest age group.
                 if v < self.sizes['age_groups'] - 1:
@@ -1803,7 +1807,10 @@ class MeanFieldSolutionGenerator():
             # Inflow due to increased addiction of current users.
             if (x == 1 or y == 1) and a > 0:
                 idx_0 = self.sdm.stock_index((x, y, 0, 0, a - 1, v))
-                f_in += self.rates['U']['phi'][(x, y, a - 1, v)] * f[idx_0]
+                if (x, y, a - 1, v) in self.rates['U']['phi']:
+                    f_in += self.rates['U']['phi'][(x, y, a - 1, v)] * f[idx_0]
+                else:
+                    f_in += self.rates['U']['phi'][(x, y, 3 - 1, v)] * f[idx_0]
             # Inflow due to decreased addiction of former users.
             if (x != 1 and y != 1) and a < 3:
                 idx_0 = self.sdm.stock_index((x, y, 0, 0, a + 1, v))
@@ -1816,7 +1823,7 @@ class MeanFieldSolutionGenerator():
             if (x, y, 0, 0, a, v) in self.sdm.death[self.sex_race]:
                 f_out += self.sdm.death[self.sex_race][(x, y, 0, 0, a, v)]
             else:
-                f_out += self.sdm.death[self.sex_race][(x, y, 0, 0, a, 2)]
+                f_out += self.sdm.death[self.sex_race][(x, y, 0, 0, 3, 2)]
             # Outflow due to developing a health condition.
             f_out += sum(self.rates['U']['kappa'][key])
             # Outflow due to increased addiction of a currently used
@@ -1873,7 +1880,10 @@ class MeanFieldSolutionGenerator():
             if (x == 1 or y == 1) and a > 0:
                 key_0 = (x, y, z, w, a - 1, v)
                 idx_0 = self.sdm.stock_index(key_0)
-                f_in += self.rates['Z']['phi'][key_0] * f[idx_0]
+                if key_0 in self.rates['Z']['phi']:
+                    f_in += self.rates['Z']['phi'][key_0] * f[idx_0]
+                else:
+                    f_in += self.rates['Z']['phi'][(x, y, z, w, 3 - 1, 2)] * f[idx_0]
             # Inflow due to decreased level of addiction from a formerly
             # used product.
             if (x != 1 and y != 1) and a < 3:
@@ -1945,7 +1955,7 @@ class MeanFieldSolutionGenerator():
             if (x,y,z,w,a,v) in self.sdm.death[self.sex_race]:
                 f_out += self.sdm.death[self.sex_race][(x,y,z,w,a,v)]
             else:
-                f_out += self.sdm.death[self.sex_race][(x,y,z,w,a,2)]
+                f_out += self.sdm.death[self.sex_race][(x,y,z,w,3,2)]
             # Outflow due to increased addiction of current product.
             if (x == 1 or y == 1) and a < 3:
                 f_out += self.rates['Z']['phi'][key]
