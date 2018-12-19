@@ -12,7 +12,7 @@ import csv
 
 param_file = "./data/run_parameters.json"
 fname = './data/stock_counts.csv'
-output_file = "$PATH/stochastic_foi.csv"
+output_file = "$PATH/${FILETYPE}_foi.csv"
 stochastic = $STOCHASTIC
 
 for nfoi in [10,15,20,50,80,100]:
@@ -51,7 +51,7 @@ for nfoi in [10,15,20,50,80,100]:
  
     # run simulation
     start = datetime.datetime.now()
-    subprocess.call(["python3","-n$NCORES","system_dynamics.py","./data/run_parameters.json"], shell=False)
+    subprocess.call(["python3","system_dynamics.py","-n$NCORES","./data/run_parameters.json"], shell=False)
     seconds = (datetime.datetime.now() - start).total_seconds()
 
     # Save time to file

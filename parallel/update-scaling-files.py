@@ -27,6 +27,7 @@ if __name__ == "__main__":
         with open(exec_path, 'w') as fh:
             fh.write(tmpl.safe_substitute(
                 PATH=args.p,
+                FILETYPE=('stochastic' if args.s else 'deterministic'),
                 NCORES=args.n,
                 STOCHASTIC=int(args.s)
             ))

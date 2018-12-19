@@ -15,7 +15,7 @@ import csv
 
 param_file = "./data/run_parameters.json"
 fname = './data/stock_counts.csv'
-output_file = "$PATH/stochastic_addiction.csv"
+output_file = "$PATH/${FILETYPE}_addiction.csv"
 stochastic = $STOCHASTIC
 
 for addiction in [4,5,10,20,30,40,50]:
@@ -55,7 +55,7 @@ for addiction in [4,5,10,20,30,40,50]:
     
     # run simulation
     start = datetime.datetime.now()
-    subprocess.call(["python3","-n$NCORES","system_dynamics.py","./data/run_parameters.json"], shell=False)
+    subprocess.call(["python3","system_dynamics.py","-n$NCORES","./data/run_parameters.json"], shell=False)
     seconds = (datetime.datetime.now() - start).total_seconds()
 
     # Save time to file
