@@ -27,13 +27,27 @@ if __name__ == '__main__':
         '-n', metavar='cores', type=int, default=1,
         help='Number of cores to use in the parallelization [default: 1]'
     )
+    ap.add_argument(
+        '-s', action='store_true',
+        help='Set a seed for reproducibility'
+    )
     args = ap.parse_args()
-    run_fp = args.params
     
     # Import the run parameters.
+    run_fp = args.params
     with open(run_fp, 'r') as f:
         params = json.load(f)
     print('Run parameters imported. Now determining system solution.')
+    
+    # Set a random seed if requested
+    if args.s:
+        RANDOM_SEED = 2**10
+        print('Setting random seed: %d' % RANDOM_SEED)
+        import random
+        import numpy as np
+        random.seed(RANDOM_SEED)
+        np.random.seed(RANDOM_SEED)
+    
     start = datetime.datetime.now()
     if args.n == 1:
         print('Executing serial version')
