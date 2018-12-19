@@ -9,10 +9,13 @@ Python code developed by Aaron to implement IMPAQ's System Dynamics Model on AWS
 ## Main file description
 
 - `system_dynamics_manager.py` defines all the necessary functions to run the algorithms.
+- `system_dynamics_manager_parallel.py` is mostly a copy of `system_dynamics_manager.py` (boo), but with the option for full parallelization of the calculation.
 - `system_dynamics.py` calls the functions defined above to solve the SD model. It can be run from the command line by 
 
   `python3 system_dynamics.py ./data/run_parameters.json`
-  
+  `python3 system_dynamics.py -n [# cores] ./data/run_parameters.json`
+  `python3 system_dynamics.py -s ./data/run_parameters.json`
+
 ## Other file description
 
 - the `run_scale_x.py` files run the model by scaling up dimension x. The file must be edited at each run to switch between the stochastic and deterministic model by changing the `stochastic` and `output_file` parameters in the script.
