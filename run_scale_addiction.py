@@ -1,5 +1,5 @@
 """
-- This program runs the code for increasing number of addiciton levels.
+- This program runs the code for increasing number of addiction levels and records the runtime
 - Make sure to change "output_file" & "stochastic" variable to switch between deterministic & stochastic
 """
 
