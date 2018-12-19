@@ -317,7 +317,6 @@ class SystemDynamicsManager():
             # Now the transition rates for stocks of type I, which again allows
             # for initiation, infection, and aging.
             rates[sr]['I'] = {'lambda':{}, 'kappa':{}, 'age':{}}
-            print(self.product('I'))
             for (z, w, v) in self.product('I'):
                 # For (z, w) we have the following possibilities (0, 1), (1,
                 # 0), (1, 1), which influence the list of all possible
@@ -2128,7 +2127,7 @@ class MeanFieldSolutionGenerator():
         upper = alpha * self.sdm.size
         # The initial states.
         y0 = self.sdm.y0[self.sex_race][lower:upper]
-        y += [y0]
+        y += [np.copy(y0)]
         # Apply Euclidean method to estimate the output values, adjusting the
         # stochastic rates with each step.
         dt = self.sdm.years / self.sdm.steps
@@ -2137,7 +2136,7 @@ class MeanFieldSolutionGenerator():
             self.sdm.update_rates(dt)
             # Given the new rates, update y0.
             y0 += np.array(self.dy_foi(t, y0, alpha)) * dt
-            y += [y0]
+            y += [np.copy(y0)]
         return np.array(y).T
 
     def solve_step(self, step, alpha):

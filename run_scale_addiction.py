@@ -1,5 +1,6 @@
 """
-- This program runs the code for increasing number ages.
+- This program runs the code for increasing number of addiciton levels.
+- Make sure to change "output_file" & "stochastic" variable to switch between deterministic & stochastic
 """
 
 import json
@@ -10,8 +11,9 @@ import os
 import csv
 
 param_file = "./data/run_parameters.json"
-output_file = "./outputs/timings/deterministic_addiction.csv"
 fname = './data/stock_counts.csv'
+output_file = "./outputs/timings/stochastic_addiction.csv"
+stochastic = 1
 
 for addiction in [4,5,10,20,30,40,50]:
     
@@ -26,7 +28,7 @@ for addiction in [4,5,10,20,30,40,50]:
     # adjust years
     params['years'] = 1
     params['num_foi'] = 10
-    params['stochastic'] = 0
+    params['stochastic'] = stochastic
     params['sruns'] = 10
 
     # save adjusted parameters file
