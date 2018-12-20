@@ -31,6 +31,7 @@ for year in levels:
     
     # adjust years
     params['years'] = year
+    params['steps'] = int(params['steps'])*year
     params['num_foi'] = 10
     params['stochastic'] = stochastic
     params['sruns'] = 10
