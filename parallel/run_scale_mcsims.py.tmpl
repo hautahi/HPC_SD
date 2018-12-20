@@ -15,7 +15,11 @@ fname = './data/stock_counts.csv'
 output_file = "$PATH/${FILETYPE}_mcsims.csv"
 stochastic = $STOCHASTIC
 
-for mc in [10,15,20,30,40,50,100]:
+levels = [10,15,20,30,40,50,100]
+if stochastic:
+    levels = levels[:-2]
+
+for mc in levels:
     
     print('*****')
     print("Running Simulation for mc runs: " + str(mc))

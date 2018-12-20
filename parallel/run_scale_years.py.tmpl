@@ -15,7 +15,11 @@ fname = './data/stock_counts.csv'
 output_file = "$PATH/${FILETYPE}_years.csv"
 stochastic = $STOCHASTIC
 
-for year in [1,5,10,15,30]:
+levels = [1,5,10,15,30]
+if stochastic:
+    levels = levels[:-1]
+
+for year in levels:
     
     print('*****')
     print("Running Simulation for years: " + str(year))

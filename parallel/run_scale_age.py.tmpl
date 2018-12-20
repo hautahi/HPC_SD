@@ -15,7 +15,11 @@ fname = './data/stock_counts.csv'
 output_file = "$PATH/${FILETYPE}_age.csv"
 stochastic = $STOCHASTIC
 
-for age in [3,4,5,10,20,30,40,50]:
+levels = [3,4,5,10,20,30,40,50]
+if stochastic:
+    levels = levels[:-4]
+
+for age in levels:
     
     print('*****')
     print("Running Simulation for age: " + str(age))

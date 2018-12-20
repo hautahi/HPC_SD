@@ -18,7 +18,11 @@ fname = './data/stock_counts.csv'
 output_file = "$PATH/${FILETYPE}_addiction.csv"
 stochastic = $STOCHASTIC
 
-for addiction in [4,5,10,20,30,40,50]:
+levels = [4,5,10,20,30,40,50]
+if stochastic:
+    levels = levels[:-2]
+
+for addiction in levels:
     
     print('*****')
     print("Running Simulation for addiction: " + str(addiction))

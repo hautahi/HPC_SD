@@ -15,7 +15,9 @@ fname = './data/stock_counts.csv'
 output_file = "$PATH/${FILETYPE}_foi.csv"
 stochastic = $STOCHASTIC
 
-for nfoi in [10,15,20,50,80,100]:
+
+levels = [10,15,20,50,80,100]
+for nfoi in levels:
     
     print('*****')
     print("Running Simulation for FOI number: " + str(nfoi))
