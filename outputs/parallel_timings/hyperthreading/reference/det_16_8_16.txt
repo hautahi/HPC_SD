@@ -1,0 +1,7 @@
+Run parameters imported. Now determining system solution.
+Executing parallel version with 16 cores
+
+*****
+System solution determined in 4.292449 seconds.
+Output files can be found in the folder './output'.
+*****
