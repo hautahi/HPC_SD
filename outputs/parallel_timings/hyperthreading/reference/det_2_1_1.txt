@@ -1,0 +1,51 @@
+Run parameters imported. Now determining system solution.
+Executing serial version
+Now solving for the sex-race pair (0, 0).
+Working on alpha = 1
+Working on alpha = 2
+Working on alpha = 3
+Working on alpha = 4
+Working on alpha = 5
+Working on alpha = 6
+Working on alpha = 7
+Working on alpha = 8
+Working on alpha = 9
+Working on alpha = 10
+Now solving for the sex-race pair (0, 1).
+Working on alpha = 1
+Working on alpha = 2
+Working on alpha = 3
+Working on alpha = 4
+Working on alpha = 5
+Working on alpha = 6
+Working on alpha = 7
+Working on alpha = 8
+Working on alpha = 9
+Working on alpha = 10
+Now solving for the sex-race pair (1, 0).
+Working on alpha = 1
+Working on alpha = 2
+Working on alpha = 3
+Working on alpha = 4
+Working on alpha = 5
+Working on alpha = 6
+Working on alpha = 7
+Working on alpha = 8
+Working on alpha = 9
+Working on alpha = 10
+Now solving for the sex-race pair (1, 1).
+Working on alpha = 1
+Working on alpha = 2
+Working on alpha = 3
+Working on alpha = 4
+Working on alpha = 5
+Working on alpha = 6
+Working on alpha = 7
+Working on alpha = 8
+Working on alpha = 9
+Working on alpha = 10
+
+*****
+System solution determined in 20.205002 seconds.
+Output files can be found in the folder './output'.
+*****

@@ -1,0 +1,451 @@
+Run parameters imported. Now determining system solution.
+Executing serial version
+Now solving for the sex-race pair (0, 0).
+Working on alpha = 1
+Stochastic run number: 0
+Stochastic run number: 1
+Stochastic run number: 2
+Stochastic run number: 3
+Stochastic run number: 4
+Stochastic run number: 5
+Stochastic run number: 6
+Stochastic run number: 7
+Stochastic run number: 8
+Stochastic run number: 9
+Working on alpha = 2
+Stochastic run number: 0
+Stochastic run number: 1
+Stochastic run number: 2
+Stochastic run number: 3
+Stochastic run number: 4
+Stochastic run number: 5
+Stochastic run number: 6
+Stochastic run number: 7
+Stochastic run number: 8
+Stochastic run number: 9
+Working on alpha = 3
+Stochastic run number: 0
+Stochastic run number: 1
+Stochastic run number: 2
+Stochastic run number: 3
+Stochastic run number: 4
+Stochastic run number: 5
+Stochastic run number: 6
+Stochastic run number: 7
+Stochastic run number: 8
+Stochastic run number: 9
+Working on alpha = 4
+Stochastic run number: 0
+Stochastic run number: 1
+Stochastic run number: 2
+Stochastic run number: 3
+Stochastic run number: 4
+Stochastic run number: 5
+Stochastic run number: 6
+Stochastic run number: 7
+Stochastic run number: 8
+Stochastic run number: 9
+Working on alpha = 5
+Stochastic run number: 0
+Stochastic run number: 1
+Stochastic run number: 2
+Stochastic run number: 3
+Stochastic run number: 4
+Stochastic run number: 5
+Stochastic run number: 6
+Stochastic run number: 7
+Stochastic run number: 8
+Stochastic run number: 9
+Working on alpha = 6
+Stochastic run number: 0
+Stochastic run number: 1
+Stochastic run number: 2
+Stochastic run number: 3
+Stochastic run number: 4
+Stochastic run number: 5
+Stochastic run number: 6
+Stochastic run number: 7
+Stochastic run number: 8
+Stochastic run number: 9
+Working on alpha = 7
+Stochastic run number: 0
+Stochastic run number: 1
+Stochastic run number: 2
+Stochastic run number: 3
+Stochastic run number: 4
+Stochastic run number: 5
+Stochastic run number: 6
+Stochastic run number: 7
+Stochastic run number: 8
+Stochastic run number: 9
+Working on alpha = 8
+Stochastic run number: 0
+Stochastic run number: 1
+Stochastic run number: 2
+Stochastic run number: 3
+Stochastic run number: 4
+Stochastic run number: 5
+Stochastic run number: 6
+Stochastic run number: 7
+Stochastic run number: 8
+Stochastic run number: 9
+Working on alpha = 9
+Stochastic run number: 0
+Stochastic run number: 1
+Stochastic run number: 2
+Stochastic run number: 3
+Stochastic run number: 4
+Stochastic run number: 5
+Stochastic run number: 6
+Stochastic run number: 7
+Stochastic run number: 8
+Stochastic run number: 9
+Working on alpha = 10
+Stochastic run number: 0
+Stochastic run number: 1
+Stochastic run number: 2
+Stochastic run number: 3
+Stochastic run number: 4
+Stochastic run number: 5
+Stochastic run number: 6
+Stochastic run number: 7
+Stochastic run number: 8
+Stochastic run number: 9
+Now solving for the sex-race pair (0, 1).
+Working on alpha = 1
+Stochastic run number: 0
+Stochastic run number: 1
+Stochastic run number: 2
+Stochastic run number: 3
+Stochastic run number: 4
+Stochastic run number: 5
+Stochastic run number: 6
+Stochastic run number: 7
+Stochastic run number: 8
+Stochastic run number: 9
+Working on alpha = 2
+Stochastic run number: 0
+Stochastic run number: 1
+Stochastic run number: 2
+Stochastic run number: 3
+Stochastic run number: 4
+Stochastic run number: 5
+Stochastic run number: 6
+Stochastic run number: 7
+Stochastic run number: 8
+Stochastic run number: 9
+Working on alpha = 3
+Stochastic run number: 0
+Stochastic run number: 1
+Stochastic run number: 2
+Stochastic run number: 3
+Stochastic run number: 4
+Stochastic run number: 5
+Stochastic run number: 6
+Stochastic run number: 7
+Stochastic run number: 8
+Stochastic run number: 9
+Working on alpha = 4
+Stochastic run number: 0
+Stochastic run number: 1
+Stochastic run number: 2
+Stochastic run number: 3
+Stochastic run number: 4
+Stochastic run number: 5
+Stochastic run number: 6
+Stochastic run number: 7
+Stochastic run number: 8
+Stochastic run number: 9
+Working on alpha = 5
+Stochastic run number: 0
+Stochastic run number: 1
+Stochastic run number: 2
+Stochastic run number: 3
+Stochastic run number: 4
+Stochastic run number: 5
+Stochastic run number: 6
+Stochastic run number: 7
+Stochastic run number: 8
+Stochastic run number: 9
+Working on alpha = 6
+Stochastic run number: 0
+Stochastic run number: 1
+Stochastic run number: 2
+Stochastic run number: 3
+Stochastic run number: 4
+Stochastic run number: 5
+Stochastic run number: 6
+Stochastic run number: 7
+Stochastic run number: 8
+Stochastic run number: 9
+Working on alpha = 7
+Stochastic run number: 0
+Stochastic run number: 1
+Stochastic run number: 2
+Stochastic run number: 3
+Stochastic run number: 4
+Stochastic run number: 5
+Stochastic run number: 6
+Stochastic run number: 7
+Stochastic run number: 8
+Stochastic run number: 9
+Working on alpha = 8
+Stochastic run number: 0
+Stochastic run number: 1
+Stochastic run number: 2
+Stochastic run number: 3
+Stochastic run number: 4
+Stochastic run number: 5
+Stochastic run number: 6
+Stochastic run number: 7
+Stochastic run number: 8
+Stochastic run number: 9
+Working on alpha = 9
+Stochastic run number: 0
+Stochastic run number: 1
+Stochastic run number: 2
+Stochastic run number: 3
+Stochastic run number: 4
+Stochastic run number: 5
+Stochastic run number: 6
+Stochastic run number: 7
+Stochastic run number: 8
+Stochastic run number: 9
+Working on alpha = 10
+Stochastic run number: 0
+Stochastic run number: 1
+Stochastic run number: 2
+Stochastic run number: 3
+Stochastic run number: 4
+Stochastic run number: 5
+Stochastic run number: 6
+Stochastic run number: 7
+Stochastic run number: 8
+Stochastic run number: 9
+Now solving for the sex-race pair (1, 0).
+Working on alpha = 1
+Stochastic run number: 0
+Stochastic run number: 1
+Stochastic run number: 2
+Stochastic run number: 3
+Stochastic run number: 4
+Stochastic run number: 5
+Stochastic run number: 6
+Stochastic run number: 7
+Stochastic run number: 8
+Stochastic run number: 9
+Working on alpha = 2
+Stochastic run number: 0
+Stochastic run number: 1
+Stochastic run number: 2
+Stochastic run number: 3
+Stochastic run number: 4
+Stochastic run number: 5
+Stochastic run number: 6
+Stochastic run number: 7
+Stochastic run number: 8
+Stochastic run number: 9
+Working on alpha = 3
+Stochastic run number: 0
+Stochastic run number: 1
+Stochastic run number: 2
+Stochastic run number: 3
+Stochastic run number: 4
+Stochastic run number: 5
+Stochastic run number: 6
+Stochastic run number: 7
+Stochastic run number: 8
+Stochastic run number: 9
+Working on alpha = 4
+Stochastic run number: 0
+Stochastic run number: 1
+Stochastic run number: 2
+Stochastic run number: 3
+Stochastic run number: 4
+Stochastic run number: 5
+Stochastic run number: 6
+Stochastic run number: 7
+Stochastic run number: 8
+Stochastic run number: 9
+Working on alpha = 5
+Stochastic run number: 0
+Stochastic run number: 1
+Stochastic run number: 2
+Stochastic run number: 3
+Stochastic run number: 4
+Stochastic run number: 5
+Stochastic run number: 6
+Stochastic run number: 7
+Stochastic run number: 8
+Stochastic run number: 9
+Working on alpha = 6
+Stochastic run number: 0
+Stochastic run number: 1
+Stochastic run number: 2
+Stochastic run number: 3
+Stochastic run number: 4
+Stochastic run number: 5
+Stochastic run number: 6
+Stochastic run number: 7
+Stochastic run number: 8
+Stochastic run number: 9
+Working on alpha = 7
+Stochastic run number: 0
+Stochastic run number: 1
+Stochastic run number: 2
+Stochastic run number: 3
+Stochastic run number: 4
+Stochastic run number: 5
+Stochastic run number: 6
+Stochastic run number: 7
+Stochastic run number: 8
+Stochastic run number: 9
+Working on alpha = 8
+Stochastic run number: 0
+Stochastic run number: 1
+Stochastic run number: 2
+Stochastic run number: 3
+Stochastic run number: 4
+Stochastic run number: 5
+Stochastic run number: 6
+Stochastic run number: 7
+Stochastic run number: 8
+Stochastic run number: 9
+Working on alpha = 9
+Stochastic run number: 0
+Stochastic run number: 1
+Stochastic run number: 2
+Stochastic run number: 3
+Stochastic run number: 4
+Stochastic run number: 5
+Stochastic run number: 6
+Stochastic run number: 7
+Stochastic run number: 8
+Stochastic run number: 9
+Working on alpha = 10
+Stochastic run number: 0
+Stochastic run number: 1
+Stochastic run number: 2
+Stochastic run number: 3
+Stochastic run number: 4
+Stochastic run number: 5
+Stochastic run number: 6
+Stochastic run number: 7
+Stochastic run number: 8
+Stochastic run number: 9
+Now solving for the sex-race pair (1, 1).
+Working on alpha = 1
+Stochastic run number: 0
+Stochastic run number: 1
+Stochastic run number: 2
+Stochastic run number: 3
+Stochastic run number: 4
+Stochastic run number: 5
+Stochastic run number: 6
+Stochastic run number: 7
+Stochastic run number: 8
+Stochastic run number: 9
+Working on alpha = 2
+Stochastic run number: 0
+Stochastic run number: 1
+Stochastic run number: 2
+Stochastic run number: 3
+Stochastic run number: 4
+Stochastic run number: 5
+Stochastic run number: 6
+Stochastic run number: 7
+Stochastic run number: 8
+Stochastic run number: 9
+Working on alpha = 3
+Stochastic run number: 0
+Stochastic run number: 1
+Stochastic run number: 2
+Stochastic run number: 3
+Stochastic run number: 4
+Stochastic run number: 5
+Stochastic run number: 6
+Stochastic run number: 7
+Stochastic run number: 8
+Stochastic run number: 9
+Working on alpha = 4
+Stochastic run number: 0
+Stochastic run number: 1
+Stochastic run number: 2
+Stochastic run number: 3
+Stochastic run number: 4
+Stochastic run number: 5
+Stochastic run number: 6
+Stochastic run number: 7
+Stochastic run number: 8
+Stochastic run number: 9
+Working on alpha = 5
+Stochastic run number: 0
+Stochastic run number: 1
+Stochastic run number: 2
+Stochastic run number: 3
+Stochastic run number: 4
+Stochastic run number: 5
+Stochastic run number: 6
+Stochastic run number: 7
+Stochastic run number: 8
+Stochastic run number: 9
+Working on alpha = 6
+Stochastic run number: 0
+Stochastic run number: 1
+Stochastic run number: 2
+Stochastic run number: 3
+Stochastic run number: 4
+Stochastic run number: 5
+Stochastic run number: 6
+Stochastic run number: 7
+Stochastic run number: 8
+Stochastic run number: 9
+Working on alpha = 7
+Stochastic run number: 0
+Stochastic run number: 1
+Stochastic run number: 2
+Stochastic run number: 3
+Stochastic run number: 4
+Stochastic run number: 5
+Stochastic run number: 6
+Stochastic run number: 7
+Stochastic run number: 8
+Stochastic run number: 9
+Working on alpha = 8
+Stochastic run number: 0
+Stochastic run number: 1
+Stochastic run number: 2
+Stochastic run number: 3
+Stochastic run number: 4
+Stochastic run number: 5
+Stochastic run number: 6
+Stochastic run number: 7
+Stochastic run number: 8
+Stochastic run number: 9
+Working on alpha = 9
+Stochastic run number: 0
+Stochastic run number: 1
+Stochastic run number: 2
+Stochastic run number: 3
+Stochastic run number: 4
+Stochastic run number: 5
+Stochastic run number: 6
+Stochastic run number: 7
+Stochastic run number: 8
+Stochastic run number: 9
+Working on alpha = 10
+Stochastic run number: 0
+Stochastic run number: 1
+Stochastic run number: 2
+Stochastic run number: 3
+Stochastic run number: 4
+Stochastic run number: 5
+Stochastic run number: 6
+Stochastic run number: 7
+Stochastic run number: 8
+Stochastic run number: 9
+
+*****
+System solution determined in 3983.632361 seconds.
+Output files can be found in the folder './output'.
+*****
