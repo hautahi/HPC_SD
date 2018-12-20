@@ -100,7 +100,7 @@ df = pd.read_csv("./outputs/timings/deterministic_addiction.csv")
 
 # Plot
 plt.plot(df['addiction'], df['time'], color='k', label='S')
-plt.xlabel('Number of Addictive Groups')
+plt.xlabel('Number of Addiction Levels')
 plt.ylabel('Runtime (Seconds)')
 fig = plt.gcf()
 fig.set_size_inches(11, 5)
@@ -124,6 +124,38 @@ plt.savefig('./outputs/plots/stochastic_years.png', dpi=300)
 plt.clf()
 
 #-------------------------
+# Runtime by foi stochastic
+# -------------------------
+
+# Read data
+df = pd.read_csv("./outputs/timings/stochastic_foi.csv")
+
+# Plot
+plt.plot(df['num_foi'], df['time'], color='k', label='S')
+plt.xlabel('Influence')
+plt.ylabel('Runtime (Seconds)')
+fig = plt.gcf()
+fig.set_size_inches(11, 5)
+plt.savefig('./outputs/plots/stochastic_foi.png', dpi=300)
+plt.clf()
+
+#-------------------------
+# Runtime by age groups deterministic
+# -------------------------
+
+# Read data
+df = pd.read_csv("./outputs/timings/stochastic_age.csv")
+
+# Plot
+plt.plot(df['age'], df['time'], color='k', label='S')
+plt.xlabel('Number of Age Groups')
+plt.ylabel('Runtime (Seconds)')
+fig = plt.gcf()
+fig.set_size_inches(11, 5)
+plt.savefig('./outputs/plots/stochastic_age.png', dpi=300)
+plt.clf()
+
+#-------------------------
 # Runtime by addiction stochastic
 # -------------------------
 
@@ -132,9 +164,25 @@ df = pd.read_csv("./outputs/timings/stochastic_addiction.csv")
 
 # Plot
 plt.plot(df['addiction'], df['time'], color='k', label='S')
-plt.xlabel('Years')
+plt.xlabel('Number of Addiction Levels')
 plt.ylabel('Runtime (Seconds)')
 fig = plt.gcf()
 fig.set_size_inches(11, 5)
 plt.savefig('./outputs/plots/stochastic_addiction.png', dpi=300)
+plt.clf()
+
+#-------------------------
+# Runtime by number of MC simulations stochastic
+# -------------------------
+
+# Read data
+df = pd.read_csv("./outputs/timings/stochastic_mcsims.csv")
+
+# Plot
+plt.plot(df['sruns'], df['time'], color='k', label='S')
+plt.xlabel('Number of Monte Carlo Simulations')
+plt.ylabel('Runtime (Seconds)')
+fig = plt.gcf()
+fig.set_size_inches(11, 5)
+plt.savefig('./outputs/plots/stochastic_mcsims.png', dpi=300)
 plt.clf()
