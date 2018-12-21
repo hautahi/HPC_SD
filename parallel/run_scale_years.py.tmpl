@@ -35,7 +35,8 @@ for year in levels:
     params['stochastic'] = stochastic
     params['sruns'] = 10
     if stochastic:
-        params['steps'] = int(params['steps'])*year
+        # assume we are keeping 12 steps as default
+        params['steps'] = 12*year
 
     # save adjusted parameters file
     with open(param_file, 'w') as f:
