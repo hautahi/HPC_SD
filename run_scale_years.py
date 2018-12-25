@@ -27,6 +27,7 @@ for year in [1,5,10,15,30]:
     
     # adjust years
     params['years'] = year
+    params['steps'] = int(12 * year)
     params['num_foi'] = 10
     params['stochastic'] = stochastic
     params['sruns'] = 10
